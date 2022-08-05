@@ -1,0 +1,13 @@
+from rest_framework.response import Response 
+from rest_framework.decorators import api_view
+from base.models import item
+from .serializers import item_serializers
+
+
+@api_view(['GET'])
+def getData(request) :
+    items = item.objects.all()
+    serializer = item_serializers(items, many=True)
+
+    return Response(serializer.data)
+
